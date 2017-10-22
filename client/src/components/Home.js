@@ -7,11 +7,53 @@ import { LinkContainer } from 'react-router-bootstrap';
 class Home extends Component{
     constructor(props) {
       super(props);
-      this.onSubmit = this.onSubmit.bind(this);
+      this.state = {
+        block1count: 0,
+        block2count: 0,
+        block3count: 0,
+        block4count: 0,
+        block5count: 0,
+      }
+      this.onSubmitA = this.onSubmitA.bind(this);
+      this.onSubmitB = this.onSubmitB.bind(this);
+      this.onSubmitC = this.onSubmitC.bind(this);
+      this.onSubmitD = this.onSubmitD.bind(this);
+      this.onSubmitE = this.onSubmitE.bind(this);
     }
-    onSubmit(e) {
-      // e.preventDefault();
+    onSubmitA(e) {
+      e.preventDefault();
       // createEntry.create("Donald Trump", null);
+      this.setState({
+         block1count: this.state.block1count + 1
+      });
+    }
+    onSubmitB(e) {
+      e.preventDefault();
+      // createEntry.create("Donald Trump", null);
+      this.setState({
+         block2count: this.state.block2count + 1
+      });
+    }
+    onSubmitC(e) {
+      e.preventDefault();
+      // createEntry.create("Donald Trump", null);
+      this.setState({
+         block3count: this.state.block3count + 1
+      });
+    }
+    onSubmitD(e) {
+      e.preventDefault();
+      // createEntry.create("Donald Trump", null);
+      this.setState({
+         block4count: this.state.block4count + 1
+      });
+    }
+    onSubmitE(e) {
+      e.preventDefault();
+      // createEntry.create("Donald Trump", null);
+      this.setState({
+         block5count: this.state.block5count + 1
+      });
     }
     render() {
         return (
@@ -32,6 +74,7 @@ class Home extends Component{
                                 <th>#</th>
                                 <th>Candidate</th>
                                 <th>Place Vote?</th>
+                                <th>Total Votes</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -39,46 +82,51 @@ class Home extends Component{
                                 <td>1</td>
                                 <td>Ronald Gump</td>
                                 <td>
-                                <Button bsStyle="info" className="hvr-grow">
+                                <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitA}>
                                     Submit
                                 </Button>
                                 </td>
+                                <td>{this.state.block1count}</td>
                               </tr>
                               <tr>
                                 <td>2</td>
                                 <td>Billary Hilton</td>
                                 <td>
-                                <Button bsStyle="info" className="hvr-grow">
+                                <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitB}>
                                     Submit
                                 </Button>
                                 </td>
+                                <td>{this.state.block2count}</td>
                               </tr>
                               <tr>
                                 <td>3</td>
                                 <td>Red Cruz</td>
                                 <td>
-                                <Button bsStyle="info" className="hvr-grow">
+                                <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitC}>
                                     Submit
                                 </Button>
                                 </td>
+                                <td>{this.state.block3count}</td>
                               </tr>
                               <tr>
                                 <td>4</td>
                                 <td>Boe Jiden</td>
                                 <td>
-                                <Button bsStyle="info" className="hvr-grow">
+                                <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitD}>
                                     Submit
                                 </Button>
                                 </td>
+                                <td>{this.state.block4count}</td>
                               </tr>
                               <tr>
                                 <td>5</td>
                                 <td>Sernie Banders</td>
                                 <td>
-                                <Button bsStyle="info" className="hvr-grow">
+                                <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitE}>
                                     Submit
                                 </Button>
                                 </td>
+                                <td>{this.state.block5count}</td>
                               </tr>
                               </tbody>
                               </Table>
@@ -86,12 +134,12 @@ class Home extends Component{
                             <Col xs={6}>
                               <Panel collapsible defaultExpanded header="Blockchain">
                                   <ListGroup fill>
-                                  <ListGroupItem>Block 1</ListGroupItem>
-                                  <ListGroupItem>Block 2</ListGroupItem>
-                                  <ListGroupItem>Block 3</ListGroupItem>
-                                  <ListGroupItem>Block 4</ListGroupItem>
-                                  <ListGroupItem>Block 5</ListGroupItem>
-                                  <ListGroupItem>Block 6</ListGroupItem>
+                                  <ListGroupItem>Block1</ListGroupItem>
+                                  <ListGroupItem>Block2</ListGroupItem>
+                                  <ListGroupItem>Block3</ListGroupItem>
+                                  <ListGroupItem>Block4</ListGroupItem>
+                                  <ListGroupItem>Block5</ListGroupItem>
+                                  <ListGroupItem>Block6</ListGroupItem>
                                   </ListGroup>
                               </Panel>
                             </Col>
