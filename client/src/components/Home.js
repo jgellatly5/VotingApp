@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactLoading from 'react-loading';
 import {Grid, Row, Col, Panel, Jumbotron, Button, Table, ListGroup, ListGroupItem} from 'react-bootstrap';
 import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -13,6 +14,7 @@ class Home extends Component{
         block3count: 0,
         block4count: 0,
         block5count: 0,
+        spin: false
       }
       this.onSubmitA = this.onSubmitA.bind(this);
       this.onSubmitB = this.onSubmitB.bind(this);
@@ -24,8 +26,13 @@ class Home extends Component{
       e.preventDefault();
       // createEntry.create("Donald Trump", null);
       this.setState({
-         block1count: this.state.block1count + 1
+         block1count: this.state.block1count + 1,
       });
+      // setInterval(function() {
+      //   this.setState({
+      //      spin: true,
+      //   });
+      // }, 1000)
     }
     onSubmitB(e) {
       e.preventDefault();
