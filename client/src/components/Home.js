@@ -3,7 +3,16 @@ import ReactLoading from 'react-loading';
 import {Grid, Row, Col, Panel, Jumbotron, Button, Table, ListGroup, ListGroupItem} from 'react-bootstrap';
 import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
-// import create from '../.././api/createEntry';
+import create from '../../../apiserver/createEntry';
+import retrieve from '../../../apiserver/retrieveEntry';
+
+var candidateRecords = {
+  "Ronald Gump" : 0,
+  "Billary Hilton": 0,
+  "Red Cruz": 0,
+  "Boe Jiden": 0,
+  "Sernie Banders": 0
+}
 
 class Home extends Component{
     constructor(props) {
@@ -16,18 +25,36 @@ class Home extends Component{
         block5count: 0,
         spin: false
       }
+      this.onCreateEntry = this.onCreateEntry.bind(this);
       this.onSubmitA = this.onSubmitA.bind(this);
       this.onSubmitB = this.onSubmitB.bind(this);
       this.onSubmitC = this.onSubmitC.bind(this);
       this.onSubmitD = this.onSubmitD.bind(this);
       this.onSubmitE = this.onSubmitE.bind(this);
     }
+    onCreateEntry(e, name) {
+      e.preventDefault();
+      create(name, function(latestTimeSlot) {
+        console.log("LATEST TIME SLOT = " + latestTimeSlot)
+        // call retrieve after second pause
+
+        setTimeout(function() {
+          retrieve(latestTimeSlot, function  (candidateName) {
+            candidateRecords[candidateName]++
+            this.setState({
+               block1count: this.state.block1count + 1,
+            });
+            //console.log("Candidate records = " + candidateRecords)
+            // Update div/UI code to reflect changes
+          });
+        }, 8000);
+    }
     onSubmitA(e) {
       e.preventDefault();
-      // createEntry.create("Donald Trump", null);
-      this.setState({
+      onCreateEntry(e, "Ronald Gump");
+      /*this.setState({
          block1count: this.state.block1count + 1,
-      });
+      });*/
       // setInterval(function() {
       //   this.setState({
       //      spin: true,
@@ -90,7 +117,7 @@ class Home extends Component{
                                 <td>Ronald Gump</td>
                                 <td>
                                 <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitA}>
-                                    Submit
+                                    Vote
                                 </Button>
                                 </td>
                                 <td>{this.state.block1count}</td>
@@ -100,7 +127,7 @@ class Home extends Component{
                                 <td>Billary Hilton</td>
                                 <td>
                                 <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitB}>
-                                    Submit
+                                    Vote
                                 </Button>
                                 </td>
                                 <td>{this.state.block2count}</td>
@@ -110,7 +137,7 @@ class Home extends Component{
                                 <td>Red Cruz</td>
                                 <td>
                                 <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitC}>
-                                    Submit
+                                    Vote
                                 </Button>
                                 </td>
                                 <td>{this.state.block3count}</td>
@@ -120,7 +147,7 @@ class Home extends Component{
                                 <td>Boe Jiden</td>
                                 <td>
                                 <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitD}>
-                                    Submit
+                                    Vote
                                 </Button>
                                 </td>
                                 <td>{this.state.block4count}</td>
@@ -130,7 +157,7 @@ class Home extends Component{
                                 <td>Sernie Banders</td>
                                 <td>
                                 <Button bsStyle="info" className="hvr-grow" onClick={this.onSubmitE}>
-                                    Submit
+                                    Vote
                                 </Button>
                                 </td>
                                 <td>{this.state.block5count}</td>

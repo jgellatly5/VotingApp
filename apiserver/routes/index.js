@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
     setTimeout(function() {
       retrieve(latestTimeSlot, function  (candidateName) {
         candidateRecords[candidateName]++
-        console.log("Candidate records = " + candidateRecords)
+        //console.log("Candidate records = " + candidateRecords)
         // Update div/UI code to reflect changes
       });
     }, 8000);
