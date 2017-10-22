@@ -13,16 +13,6 @@ class Navigation extends Component{
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
-                    <Navbar.Collapse>
-                    <Nav>
-                        <IndexLinkContainer to="/">
-                            <NavItem eventKey={ 1 } className="hvr-underline-from-left-white">Home</NavItem>
-                        </IndexLinkContainer>
-                        <LinkContainer to="/createEntry">
-                            <NavItem eventKey={ 2 } className="hvr-underline-from-left-white">Create Entry</NavItem>
-                        </LinkContainer>
-                    </Nav>
-                    </Navbar.Collapse>
                 </Navbar>
             );
     }

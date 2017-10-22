@@ -13,3 +13,12 @@ h1 {
   margin-bottom: 30px;
   font-size: 30px;
 }
+
+.navbar-brand {
+  padding-left: 430px;
+  font-size: 40px;
+}
+
+th {
+  font-size: 20px;
+}
