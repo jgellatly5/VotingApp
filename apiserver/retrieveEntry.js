@@ -25,12 +25,11 @@ protobuf.load("message.proto", function(err, root) {
 	}
 });
 
-function retrieve(fromSlot, callback) {
+function retrieve(hash, callback) {
   var requestData = {
-		"from": fromSlot,
-		"to": fromSlot
+
 	};
-  blockchain.Block.list(requestData
+	blockchain.TransactionEntry.read("", { "hash": hash }
   , function (error, data) {
     if (error) {
       console.error("HttpStatus: "+error.getHttpStatus());
@@ -41,40 +40,63 @@ function retrieve(fromSlot, callback) {
 
     }
     else {
-			for (i = 0; i < data.length; i++) {
-				/*
-				console.log(data[i].authority);     //Output-->PegupZdN96Kqe1GWgqEqLMkzeA4PotbUv2wiKZZqqqKDH3sDA9cozcEakAsmJxYRv8zHCHuuFujTRxUgYxrNA6Fw
-	      console.log(data[i].hash);     //Output-->87d97de8c553381adc735439762396355fe54322d580b7da642035a2c5b917bc
-	      console.log(data[i].nonce);     //Output-->13465573658468563000
-	      console.log(data[i].previous_block);     //Output-->f106b05908504960a5a5d47422cbb47a3ad138f6bbbb40e0af00d7750d04f0fb
-	      console.log(data[i].signature);     //Output-->AN1rKryh8muZCbtqPu7gFmahvx9N6emWyqMNgTDXGcomHSWQK9Tt7J3CUY1yDCFU7bTH7jD3qCyyta4GX8RBYtVVNif8X8kx4
-	      console.log(data[i].slot);     //Output-->1503572680
-	      console.log(data[i].version);     //Output-->1
-*/
-				for (j = 0; j < data[i].partitions.length; j++) {
-					var entries = data[i].partitions[j].entries
-					if (entries.length > 0) {
-						var entryHex = entries[0].value
 
-						var message = Message.decode(new Buffer(entryHex, 'hex'));
-						var object = Message.toObject(message, {
-								longs: String,
-								enums: String,
-								bytes: String
-						});
-
-						console.log("candidate = " + object)
-						callback(object, entries[0].slot)
-					}
-				}
+			var message = Message.decode(new Buffer(data.value, 'hex'));
+			var object = Message.toObject(message, {
+					longs: String,
+					enums: String,
+					bytes: String
+			});
+			console.log("candidate = ", object)
+			callback(object)
 
 			}
 
       // var response = JSON.parse(partitions[].entries[]);
       // console.log(response);
-    }
+
   });
 }
+
+/*
+for (i = 0; i < data.length; i++) {
+	for (j = 0; j < data[i].partitions.length; j++) {
+		var entries = data[i].partitions[j].entries
+		if (entries.length > 0) {
+			console.log("entries = " + entries)
+			console.log("entries[0] = " + entries[0])
+			var entryHex = entries[0].value
+			console.log("entry hex = " + entryHex)
+			var message = Message.decode(new Buffer(entryHex, 'hex'));
+			var object = Message.toObject(message, {
+					longs: String,
+					enums: String,
+					bytes: String
+			});
+
+			console.log("candidate = " + object)
+			callback(object, entries[0].slot)
+		}
+	}*/
+	/*
+	for (j = 0; j < data.partitions.length; j++) {
+		var entries = data.partitions[j].entries
+		if (entries.length > 0) {
+			console.log("entries = " + entries)
+			console.log("entries[0] = " + entries[0])
+			var entryHex = entries[0].value
+			console.log("entry hex = " + entryHex)
+			var message = Message.decode(new Buffer(entryHex, 'hex'));
+			var object = Message.toObject(message, {
+					longs: String,
+					enums: String,
+					bytes: String
+			});
+
+			console.log("candidate = " + object)
+			callback(object, entries[0].slot)
+		}
+		*/
 function hex2a(hexx) {
     var hex = hexx.toString();//force conversion
     var str = '';

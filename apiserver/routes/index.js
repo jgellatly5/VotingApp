@@ -16,11 +16,22 @@ router.get('/', function(req, res, next) {
   // initiate this only on tap of button
   create(req.query.name, function(latestTimeSlot) {
     console.log("LATEST TIME SLOT = " + latestTimeSlot)
+    // call retrieve after second pause
+
+    setTimeout(function() {
+      retrieve(latestTimeSlot, function  (candidateName) {
+        candidateRecords[candidateName]++
+        console.log("Candidate records = " + candidateRecords)
+        // Update div/UI code to reflect changes
+      });
+    }, 8000);
+
+    /*
     retrieve(latestTimeSlot, function  (candidateName, latestTimeSlot) {
       candidateRecords[candidateName]++
       console.log("Candidate records = " + candidateRecords)
       // Update div/UI code to reflect changes
-    });
+    });*/
   });
 
   res.render('index', { title: 'Express' });

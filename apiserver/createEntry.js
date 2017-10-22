@@ -44,8 +44,8 @@ function create(value, callback) {
 
   	}
   	else {
-  		console.log("SLOT = " + data.slot);     //Output-->1503662624
-			return callback(data.slot)
+  		console.log("HASH = " + data.hash);     //Output-->1503662624
+			return callback(data.hash)
   	}
   });
 }
